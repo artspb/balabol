@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+  "name": "Balabol for Google Meet",
+  "description": "Shows how much people speak during a Google Meet conference.",
+  "version": "0.1",
+  "author": "Artem Khvastunov",
+  "homepage_url": "https://github.com/artspb/balabol",
+  "icons": {
+    "24": "images/icon24.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "24": "images/icon24.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Balabol"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://meet.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "balabol.js"
+  ]
+}
