@@ -25,7 +25,7 @@ function updater() {
                     const started = event['started']
                     const stopped = event['stopped']
                     if (started && stopped) {
-                        duration += Math.floor((Date.parse(stopped) - Date.parse(started)) / 1000)
+                        duration += Math.floor((stopped - started) / 1000)
                     }
                 }
                 if (duration !== 0) {

@@ -74,12 +74,12 @@ function VolumeProxyHandler(object) {
                 if (thisArgument[object].getVolume() > 0) {
                     if (!last || last['stopped']) {
                         log('[Balabol] Speaking', name)
-                        events.push({'started': new Date()})
+                        events.push({'started': +new Date()})
                     }
                 } else {
                     if (last && !last['stopped']) {
                         log('[Balabol] Stopped', name)
-                        last['stopped'] = new Date()
+                        last['stopped'] = +new Date()
                     }
                 }
             }
