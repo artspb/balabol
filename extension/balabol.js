@@ -28,9 +28,11 @@ function removeStaleEvents(storage) {
                 continue
             }
             const events = participants[name]
-            const last = events[events.length - 1]
-            if (last.started && !last.stopped) {
-                events.splice(events.length - 1, 1)
+            if (events && events.length > 0) {
+                const last = events[events.length - 1]
+                if (last && !last.diff) {
+                    events.splice(events.length - 1, 1)
+                }
             }
         }
     }
@@ -93,14 +95,15 @@ function VolumeProxyHandler(object) {
                 }
                 const last = events[events.length - 1]
                 if (thisArgument[object].getVolume() > 0) {
-                    if (!last || last.stopped) {
+                    if (!last || last.diff) {
                         log('[Balabol] Speaking', name)
                         events.push({started: +new Date()})
                     }
                 } else {
-                    if (last && !last.stopped) {
+                    if (last && !last.diff) {
                         log('[Balabol] Stopped', name)
-                        last.stopped = +new Date()
+                        last.diff = +new Date() - last.started
+                        delete last.started
                     }
                 }
             }
