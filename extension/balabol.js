@@ -57,6 +57,7 @@ function VolumeProxyHandler(object) {
                     }
                 }
             }
+
             const name = thisArgument.__balabol_video.querySelector("div[data-self-name='You']").textContent
             if (name) {
                 let map = storage[location.pathname]
