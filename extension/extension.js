@@ -25,9 +25,10 @@ function updater() {
                     const started = event.started
                     const stopped = event.stopped
                     if (started && stopped) {
-                        duration += Math.floor((stopped - started) / 1000)
+                        duration += stopped - started
                     }
                 }
+                duration = Math.floor(duration / 1000)
                 if (duration !== 0) {
                     durations.push([name, duration])
                 }
