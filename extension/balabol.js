@@ -11,9 +11,29 @@ function load() {
     const storage = JSON.parse(sessionStorage.getItem(`__balabol_map`))
     if (storage) {
         log(`[Balabol] Loaded data for ${location.pathname}`)
+        removeStaleEvents(storage)
         return storage
     }
     return {}
+}
+
+function removeStaleEvents(storage) {
+    for (const pathname in storage) {
+        if (!Object.prototype.hasOwnProperty.call(storage, pathname)) {
+            continue
+        }
+        const participants = storage[pathname].participants
+        for (const name in participants) {
+            if (!Object.prototype.hasOwnProperty.call(participants, name)) {
+                continue
+            }
+            const events = participants[name]
+            const last = events[events.length - 1]
+            if (last.started && !last.stopped) {
+                events.splice(events.length - 1, 1)
+            }
+        }
+    }
 }
 
 setInterval(() => {
