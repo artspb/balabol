@@ -22,8 +22,8 @@ function updater() {
                 let duration = 0
                 for (let i = 0; i < events.length; i++) {
                     const event = events[i]
-                    const started = event['started']
-                    const stopped = event['stopped']
+                    const started = event.started
+                    const stopped = event.stopped
                     if (started && stopped) {
                         duration += Math.floor((stopped - started) / 1000)
                     }
