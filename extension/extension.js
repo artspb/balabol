@@ -5,7 +5,7 @@ function updater() {
     chrome.tabs.query({active: true, currentWindow: true}, tabs => {
         chrome.tabs.sendMessage(tabs[0].id, {type: 'getMap'}, response => {
             let info = document.getElementById('__balabol_info')
-            if (!response || !response.map) {
+            if (chrome.runtime.lastError || !response || !response.map) {
                 info.innerHTML = 'No meeting information available'
                 return
             }
